@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
+import 'widgets/pic_tiles.dart';
+import 'account.dart';
 
 void main() {
   runApp(MyApp());
@@ -20,7 +23,7 @@ class MyApp extends StatelessWidget {
         // or simply save your changes to "hot reload" in a Flutter IDE).
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.red,
       ),
       home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
@@ -46,17 +49,30 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  List<Account> suggestions = [
+    Account(title: 'Joe Biden', label: 'Politician'),
+    Account(title: 'Apple', label: 'Company'),
+    Account(title: 'Apple', label: 'Fruit'),
+    Account(title: 'Nicky Minaj', label: 'Singer'),
+    Account(title: 'Benjamin Shapiro', label: 'Author'),
+    Account(title: 'Jordan Peterson', label: 'Author'),
+  ];
 
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
+  List<Account> getSuggestions(String pattern) {
+    //If the user has not given any input yet, return nothing it all
+    if (pattern == "") {
+      return [];
+    }
+    List<Account> matches = [];
+
+    for (Account account in suggestions) {
+      RegExp exp = RegExp(pattern, caseSensitive: false);
+      if (exp.hasMatch(account.title)) {
+        matches.add(account);
+      }
+    }
+
+    return matches;
   }
 
   @override
@@ -68,45 +84,79 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.only(top: 200),
+          child: Padding(
+            padding: const EdgeInsets.all(30.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Container(
+                  padding: EdgeInsets.all(5),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(1000)),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Color.fromRGBO(0, 0, 0, 0.04),
+                          spreadRadius: 0,
+                          blurRadius: 10,
+                        )
+                      ]),
+                  child: TypeAheadField(
+                    noItemsFoundBuilder: (context) {
+                      return ListTile(
+                        leading: Icon(Icons.no_accounts),
+                        title: Text("No matches found"),
+                      );
+                    },
+                    textFieldConfiguration: TextFieldConfiguration(
+                        cursorColor: Colors.black,
+                        decoration: InputDecoration(
+                          fillColor: Colors.white,
+                          filled: true,
+                          suffixIcon: Icon(
+                            Icons.search,
+                            color: Colors.grey,
+                          ),
+                          hintStyle: TextStyle(fontSize: 13, color: Colors.grey),
+                          hintText:
+                              'www.faz.de/yourarticle, Nicky Minaj, Apple, Benjamin Shapiro',
+                          enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Colors.transparent,
+                                  width: 0,
+                                  style: BorderStyle.solid),
+                              borderRadius: BorderRadius.all(Radius.circular(1000))),
+                          focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Colors.pink,
+                                  width: 2.0,
+                                  style: BorderStyle.solid),
+                              borderRadius: BorderRadius.all(Radius.circular(1000))),
+                        )),
+                    suggestionsCallback: (pattern) async {
+                      return await getSuggestions(pattern);
+                    },
+                    itemBuilder: (context, suggestion) {
+                      Account account = suggestion as Account;
+                      return ListTile(
+                        leading: Icon(Icons.search),
+                        title: Text(account.title),
+                        subtitle: Text(account.label),
+                      );
+                    },
+                    onSuggestionSelected: (suggestion) {
+                      Navigator.of(context)
+                          .push(MaterialPageRoute(builder: (context) => Container()));
+                    },
+                  ),
+                ),
+                PicTiles(accounts: suggestions,),
+              ],
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
+          ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
