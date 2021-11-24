@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../account.dart';
+import '../data_model/account.dart';
 import 'pic_tile.dart';
 
 class PicTiles extends StatelessWidget {
