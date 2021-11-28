@@ -16,7 +16,7 @@ extension transformToString on statementType {
   String name() {
     switch (this) {
       case statementType.individual:
-        return "Own";
+        return "Individual";
       case statementType.about:
         return "Involving";
       case statementType.related:
@@ -28,96 +28,97 @@ extension transformToString on statementType {
 void main() {
   runApp(MaterialApp(
     home: AccountView(
+        isATest: false,
         entity: new Account(
             title: "Joseph Robinette Biden Sr.",
             image: Image(image: AssetImage("test/test_data/joe_biden.jpg")),
             label: "Politician",
             statementsabout: [
-          new Statement(
-              statement: "Hello",
-              isFactual: false,
-              description: "False",
-              author: "me",
-              sources: ["me"])
-        ],
+              new Statement(
+                  statement: "Hello",
+                  isFactual: false,
+                  description: "False",
+                  author: "me",
+                  sources: ["me"])
+            ],
             statementsfrom: [
-          new Statement(
-              statement:
-                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sapien turpis, semper eget quam ut, aliquet consectetur ipsum. Cras ornare urna metus, quis placerat ex accumsan eget. Integer rhoncus ex non nisl dignissim auctor. Nam in vehicula nisi. Fusce sollicitudin lorem vel felis vehicula, in luctus risus bibendum. Suspendisse eget.",
-              isFactual: false,
-              description: "This is the description of the data that is presented above on Joe Biden.",
-              author: "me",
-              date: DateTime.now(),
-              sources: ["https://www.google.com"]),
-          new Statement(
-              statement: "Hello",
-              isFactual: true,
-              description: "Factual",
-              author: "not me",
-              sources: ["me"]),
-          new Statement(
-              statement: "Hello",
-              isFactual: false,
-              description: "False",
-              author: "me",
-              sources: ["me"]),
-          new Statement(
-              statement: "Hello",
-              isFactual: false,
-              description: "False",
-              author: "me",
-              sources: ["me"]),
-          new Statement(
-              statement: "Hello",
-              isFactual: false,
-              description: "False",
-              author: "me",
-              sources: ["me"]),
-          new Statement(
-              statement: "Hello",
-              isFactual: false,
-              description: "False",
-              author: "me",
-              sources: ["me"]),
-          new Statement(
-              statement: "Hello",
-              isFactual: false,
-              description: "False",
-              author: "me",
-              sources: ["me"]),
-          new Statement(
-              statement: "Hello",
-              isFactual: false,
-              description: "False",
-              author: "me",
-              sources: ["me"]),
-          new Statement(
-              statement: "Hello",
-              isFactual: false,
-              description: "False",
-              author: "me",
-              sources: ["me"]),
-          new Statement(
-              statement: "Hello",
-              isFactual: false,
-              description: "False",
-              author: "me",
-              sources: ["me"]),
-          new Statement(
-              statement: "Hello",
-              isFactual: false,
-              description: "False",
-              author: "me",
-              sources: ["me"])
-        ],
+              new Statement(
+                  statement:
+                      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sapien turpis, semper eget quam ut, aliquet consectetur ipsum. Cras ornare urna metus, quis placerat ex accumsan eget. Integer rhoncus ex non nisl dignissim auctor. Nam in vehicula nisi. Fusce sollicitudin lorem vel felis vehicula, in luctus risus bibendum. Suspendisse eget.",
+                  isFactual: false,
+                  description: "This is the description of the data that is presented above on Joe Biden.",
+                  author: "me",
+                  date: DateTime.now(),
+                  sources: ["https://www.google.com"]),
+              new Statement(
+                  statement: "Hello",
+                  isFactual: true,
+                  description: "Factual",
+                  author: "not me",
+                  sources: ["me"]),
+              new Statement(
+                  statement: "Hello",
+                  isFactual: false,
+                  description: "False",
+                  author: "me",
+                  sources: ["me"]),
+              new Statement(
+                  statement: "Hello",
+                  isFactual: false,
+                  description: "False",
+                  author: "me",
+                  sources: ["me"]),
+              new Statement(
+                  statement: "Hello",
+                  isFactual: false,
+                  description: "False",
+                  author: "me",
+                  sources: ["me"]),
+              new Statement(
+                  statement: "Hello",
+                  isFactual: false,
+                  description: "False",
+                  author: "me",
+                  sources: ["me"]),
+              new Statement(
+                  statement: "Hello",
+                  isFactual: false,
+                  description: "False",
+                  author: "me",
+                  sources: ["me"]),
+              new Statement(
+                  statement: "Hello",
+                  isFactual: false,
+                  description: "False",
+                  author: "me",
+                  sources: ["me"]),
+              new Statement(
+                  statement: "Hello",
+                  isFactual: false,
+                  description: "False",
+                  author: "me",
+                  sources: ["me"]),
+              new Statement(
+                  statement: "Hello",
+                  isFactual: false,
+                  description: "False",
+                  author: "me",
+                  sources: ["me"]),
+              new Statement(
+                  statement: "Hello",
+                  isFactual: false,
+                  description: "False",
+                  author: "me",
+                  sources: ["me"])
+            ],
             statementsrelevant: [
-          new Statement(
-              statement: "Hello",
-              isFactual: false,
-              description: "False",
-              author: "me",
-              sources: ["me"])
-        ])),
+              new Statement(
+                  statement: "Hello",
+                  isFactual: false,
+                  description: "False",
+                  author: "me",
+                  sources: ["me"])
+            ])),
   ));
 }
 
@@ -128,17 +129,27 @@ Input: Account entity
 Output: Widget
  */
 class AccountView extends StatefulWidget {
-  const AccountView({Key? key, required this.entity}) : super(key: key);
+  const AccountView(
+      {Key? key,
+      required this.entity,
+      required this.isATest,
+      this.selectedType = statementType.individual})
+      : super(key: key);
 
   final Account entity;
+  final bool isATest;
+  final statementType selectedType;
 
   @override
-  _AccountViewState createState() => _AccountViewState();
+  _AccountViewState createState() =>
+      _AccountViewState(currentType: selectedType);
 }
 
 // State class for AccountView, enables the switching of the displayed statements
 class _AccountViewState extends State<AccountView> {
-  statementType _currentType = statementType.individual;
+  _AccountViewState({required this.currentType});
+
+  statementType currentType;
   statementType _typeButton1 = statementType.individual;
   Color _buttonColor1 = Colors.black54;
   statementType _typeButton2 = statementType.about;
@@ -150,7 +161,7 @@ class _AccountViewState extends State<AccountView> {
   Widget build(BuildContext context) {
     // First determine what is the current state and enable the proper statements being displayed
     List<Statement> statements;
-    switch (_currentType) {
+    switch (currentType) {
       case statementType.individual:
         statements = widget.entity.statementsfrom;
         break;
@@ -231,64 +242,92 @@ class _AccountViewState extends State<AccountView> {
           automaticallyImplyLeading: true,
         ),
         // Generates the two buttons to filter through the statements, the buttons change text dynamically so you can always switch to the other two unselected filters (Sliver List used for simplicity could be any type of sliver)
-        SliverList(
-          delegate:
-              // Generate a child delegate that builds a row of buttons
-              SliverChildBuilderDelegate((BuildContext context, int index) {
-            return Padding(
-              padding: const EdgeInsets.all(15),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  // Generate the FilterButtons to filter the statements they take a title and onPressed function as input
-                  FilterButton(
-                    color: _buttonColor1,
-                    title: _typeButton1.name(),
-                    onPressed: () {
-                      _changeStatementType(_typeButton1);
-                    },
-                  ),
-                  FilterButton(color: _buttonColor2, title: _typeButton2.name(), onPressed: () {
-                    _changeStatementType(_typeButton2);
-                  }),
-                  FilterButton(
-                    color: _buttonColor3,
-                    title: _typeButton3.name(),
-                    onPressed: () {
-                      _changeStatementType(_typeButton3);
-                    },
-                  )
-                ],
+        !widget.isATest
+            ? SliverList(
+                delegate:
+                    // Generate a child delegate that builds a row of buttons
+                    SliverChildBuilderDelegate(
+                        (BuildContext context, int index) {
+                  return Padding(
+                    padding: const EdgeInsets.all(15),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        // Generate the FilterButtons to filter the statements they take a title and onPressed function as input
+                        FilterButton(
+                          color: _buttonColor1,
+                          title: _typeButton1.name(),
+                          onPressed: () {
+                            _changeStatementType(_typeButton1);
+                          },
+                        ),
+                        FilterButton(
+                            color: _buttonColor2,
+                            title: _typeButton2.name(),
+                            onPressed: () {
+                              _changeStatementType(_typeButton2);
+                            }),
+                        FilterButton(
+                          color: _buttonColor3,
+                          title: _typeButton3.name(),
+                          onPressed: () {
+                            _changeStatementType(_typeButton3);
+                          },
+                        )
+                      ],
+                    ),
+                  );
+                }, childCount: 1),
+              )
+            : SliverPadding(
+                padding: EdgeInsets.only(top: 15),
+                sliver: SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                      (BuildContext context, int index) {
+                        return Center(child: Text(currentType.name(), style: TextStyle(
+                          fontSize: 34,
+                          fontWeight: FontWeight.bold
+                        ),));
+                      }
+                  ,
+                  childCount: 1),
+                ),
               ),
-            );
-          }, childCount: 1),
-        ),
         // Generate a list of all statements that are currently filtered for
-        statements.length != 0 ? SliverPadding(
-          padding: EdgeInsets.only(bottom: 100),
-          sliver: SliverList(
-              delegate:
-              SliverChildBuilderDelegate((BuildContext context, int index) {
-                return Center(
-                    child: Container(
-                        width: MediaQuery.of(context).size.width,
-                        // Replace with statement widget
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            StatementContainer(statement: statements.elementAt(index))
-                          ],
-                        )));
-              }, childCount: statements.length)),
-        ) : SliverPadding(padding: EdgeInsets.all(30), sliver: SliverList(
-          delegate: SliverChildBuilderDelegate((BuildContext context, int index) {
-            return Center(
-              child: Text("No statements available", style: TextStyle(fontSize: 24),),
-            );
-          },
-              childCount: 1),
-        ),)
+        statements.length != 0
+            ? SliverPadding(
+                padding: EdgeInsets.only(bottom: 100),
+                sliver: SliverList(
+                    delegate: SliverChildBuilderDelegate(
+                        (BuildContext context, int index) {
+                  return Center(
+                      child: Container(
+                          width: MediaQuery.of(context).size.width,
+                          // Replace with statement widget
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              StatementContainer(
+                                  statement: statements.elementAt(index))
+                            ],
+                          )));
+                }, childCount: statements.length)),
+              )
+            : SliverPadding(
+                padding: EdgeInsets.all(30),
+                sliver: SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                      (BuildContext context, int index) {
+                    return Center(
+                      child: Text(
+                        "No statements available",
+                        style: TextStyle(fontSize: 24),
+                      ),
+                    );
+                  }, childCount: 1),
+                ),
+              )
       ],
     ));
   }
@@ -298,7 +337,7 @@ class _AccountViewState extends State<AccountView> {
     switch (_type) {
       case statementType.about:
         setState(() {
-          _currentType = statementType.about;
+          currentType = statementType.about;
           _buttonColor1 = Colors.black87;
           _buttonColor2 = Colors.black54;
           _buttonColor3 = Colors.black87;
@@ -306,7 +345,7 @@ class _AccountViewState extends State<AccountView> {
         break;
       case statementType.individual:
         setState(() {
-          _currentType = statementType.individual;
+          currentType = statementType.individual;
           _buttonColor1 = Colors.black54;
           _buttonColor2 = Colors.black87;
           _buttonColor3 = Colors.black87;
@@ -314,7 +353,7 @@ class _AccountViewState extends State<AccountView> {
         break;
       case statementType.related:
         setState(() {
-          _currentType = statementType.related;
+          currentType = statementType.related;
           _buttonColor1 = Colors.black87;
           _buttonColor2 = Colors.black87;
           _buttonColor3 = Colors.black54;
@@ -357,7 +396,11 @@ class _FavoriteIconState extends State<_FavoriteIcon> {
 // Generate a Button that looks similar to IOS style buttons under the material theme
 // Takes two inputs: A string title and a function onPressed that returns void
 class FilterButton extends StatelessWidget {
-  const FilterButton({Key? key, required this.title, required this.onPressed, this.color = Colors.black87 })
+  const FilterButton(
+      {Key? key,
+      required this.title,
+      required this.onPressed,
+      this.color = Colors.black87})
       : super(key: key);
 
   final String title;
@@ -375,8 +418,7 @@ class FilterButton extends StatelessWidget {
             // Stacks a button in front of a Rectangle
             child: Stack(children: [
               Positioned.fill(
-                  child: Container(
-                      decoration: BoxDecoration(color: color))),
+                  child: Container(decoration: BoxDecoration(color: color))),
               Center(
                   child: TextButton(
                 child: Text(title),

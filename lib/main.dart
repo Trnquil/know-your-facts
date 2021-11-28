@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:know_your_facts/accountView.dart';
+import 'package:know_your_facts/data_model/suggestion.dart';
 import 'widgets/pic_tiles.dart';
 import 'data_model/account.dart';
 
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Know Your Facts',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.red,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(title: 'Know Your Facts'),
     );
   }
 }
@@ -50,6 +51,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  bool isATest = false;
+  statementType selectedStatementType = statementType.individual;
+
   List<Account> suggestions = [
     Account(title: 'Apple', label: 'Company',image: Image(image: NetworkImage("https://www.apple.com/ac/structured-data/images/open_graph_logo.png?202111120425"),) ),
     Account(title: 'Apple', label: 'Fruit', image: Image(image: NetworkImage("https://www.applesfromny.com/wp-content/uploads/2020/06/SnapdragonNEW.png"))),
@@ -398,17 +402,30 @@ class _MyHomePageState extends State<MyHomePage> {
     ),
   ];
 
-  List<Account> getSuggestions(String pattern) {
+  List<Suggestion> getSuggestions(String pattern) {
     //If the user has not given any input yet, return nothing it all
     if (pattern == "") {
       return [];
     }
-    List<Account> matches = [];
+    List<Suggestion> matches = [];
+
+    RegExp exp = RegExp(pattern, caseSensitive: false,);
 
     for (Account account in suggestions) {
-      RegExp exp = RegExp(pattern, caseSensitive: false);
-      if (exp.hasMatch(account.title)) {
-        matches.add(account);
+      if (isATest) {
+        if (exp.hasMatch(account.title + " " + statementType.about.name())) {
+          matches.add(new Suggestion(entity: account, type: statementType.about));
+        }
+        if (exp.hasMatch(account.title + " " + statementType.individual.name())) {
+          matches.add(new Suggestion(entity: account, type: statementType.individual));
+        }
+        if (exp.hasMatch(account.title + " " + statementType.related.name())) {
+          matches.add(new Suggestion(entity: account, type: statementType.related));
+        }
+      } else {
+        if (exp.hasMatch(account.title)) {
+          matches.add(new Suggestion(entity: account));
+        }
       }
     }
 
@@ -426,7 +443,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.only(top: 200),
+          padding: EdgeInsets.only(top: (MediaQuery.of(context).size.height/3.2)),
           child: Padding(
             padding: const EdgeInsets.all(30.0),
             child: Column(
@@ -479,25 +496,41 @@ class _MyHomePageState extends State<MyHomePage> {
                                   BorderRadius.all(Radius.circular(1000))),
                         )),
                     suggestionsCallback: (pattern) async {
-                      return await getSuggestions(pattern);
+                      return getSuggestions(pattern);
                     },
                     itemBuilder: (context, suggestion) {
-                      Account account = suggestion as Account;
+                      Suggestion _suggestion = suggestion as Suggestion;
+                      Account account = _suggestion.entity ?? new Account();
                       return ListTile(
                         leading: Icon(Icons.search),
                         title: Text(account.title),
-                        subtitle: Text(account.label),
+                        subtitle: Text(isATest ? account.label + " - " +  _suggestion.type.name() : account.label),
                       );
                     },
                     onSuggestionSelected: (suggestion) {
+                      Suggestion _suggestion = suggestion as Suggestion;
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) =>
-                              AccountView(entity: suggestion as Account)));
+                              AccountView(entity: _suggestion.entity as Account, isATest: isATest, selectedType: _suggestion.type,)));
                     },
                   ),
                 ),
                 PicTiles(
                   accounts: suggestions,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text("A Test"),
+                    Switch(value: isATest, onChanged: (bool newValue) {
+                      setState(() {
+                        print(newValue);
+                        isATest = newValue;
+                      });
+                    })
+                  ],
                 ),
               ],
             ),
@@ -506,4 +539,6 @@ class _MyHomePageState extends State<MyHomePage> {
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
+
+
 }
