@@ -67,31 +67,47 @@ class _MyHomePageState extends State<MyHomePage> {
       statementsfrom: [
         Statement(
             statement:
-                "This afternoon, I stopped by the State Department to meet with staff and thank them for their service to our nation. With their help, the United States will again lead not just by the example of our power, but by the power of our example."),
+                "This afternoon, I stopped by the State Department to meet with staff and thank them for their service to our nation. With their help, the United States will again lead not just by the example of our power, but by the power of our example.",
+            author: "Joe Biden",
+            date: DateTime(2021, 2, 5, 10, 10, 0),
+            isFactual: false,
+            description: "This statement is considered debatable as there is no correlation between the State Department and the percieved power of the United States",
+            sources: ["https://www.google.com"]),
         Statement(
             statement:
-                "The American Rescue Plan is getting us back on track — but we need to go further. We need the American Jobs Plan."),
+                "The American Rescue Plan is getting us back on track — but we need to go further. We need the American Jobs Plan.",
+            author: "Joe Biden"),
         Statement(
             statement:
-                "We can ban assault weapons and high-capacity magazines. We can close loopholes in our gun background check system."),
+                "We can ban assault weapons and high-capacity magazines. We can close loopholes in our gun background check system.",
+            author: "Joe Biden"),
         Statement(
             statement:
-                "Tonight, I’ll be answering questions at my first town hall since taking office. Make sure to tune in to CNN at 9 PM ET / 8 PM CT to watch."),
+                "Tonight, I’ll be answering questions at my first town hall since taking office. Make sure to tune in to CNN at 9 PM ET / 8 PM CT to watch.",
+            author: "Joe Biden"),
         Statement(
             statement:
-                "My message to the American people is this: America is moving again. And your life is going to change for the better thanks to the Bipartisan Infrastructure Deal."),
+                "My message to the American people is this: America is moving again. And your life is going to change for the better thanks to the Bipartisan Infrastructure Deal.",
+            author: "Joe Biden"),
         Statement(
             statement:
-                "Seventeen Nobel Prize winning economists said that Build Back Better will ease longer-term inflationary pressures and lower costs for American families. We can get this done."),
+                "Seventeen Nobel Prize winning economists said that Build Back Better will ease longer-term inflationary pressures and lower costs for American families. We can get this done.",
+            author: "Joe Biden"),
         Statement(
             statement:
-                "Our economy has created 5.6 million jobs since January and unemployment is below 5%. But Americans across the country are facing prices that are just too high. We must pass the Build Back Better Act to lower costs for working families and help get people back to work."),
-        Statement(statement: "Unemployment is at a record low")
+                "Our economy has created 5.6 million jobs since January and unemployment is below 5%. But Americans across the country are facing prices that are just too high. We must pass the Build Back Better Act to lower costs for working families and help get people back to work.",
+            author: "Joe Biden"),
+        Statement(statement: "Unemployment is at a record low",
+            author: "Joe Biden")
       ],
       statementsabout: [
         Statement(
             statement:
-                "THE LIE-DEN ADMINISTRATION: President Biden, VP Harris and their administration are still pushing the lie that Build Back Better 'won’t cost anything'. How can a \$1.75 trillion plan be free?"),
+                "THE LIE-DEN ADMINISTRATION: President Biden, VP Harris and their administration are still pushing the lie that Build Back Better 'won’t cost anything'. How can a \$1.75 trillion plan be free?",
+        author: "Sean Hannity",
+        isFactual: true,
+        description: "This statement is considered factual as the Infrastructure Bill will cost the American taxpayers in the longrun, while the benefits are still to be seen",
+        date: DateTime(2021,11,13, 2, 30)),
         Statement(
             statement:
                 "President Biden signs order to address 'crisis of violence' against Native Americans at White House summit"),
@@ -115,6 +131,13 @@ class _MyHomePageState extends State<MyHomePage> {
                 "BIDEN VS HARRIS? Rumors of tension in the Biden admin are swirling following several reports about VP Harris’ dysfunctional office. The rumors come as President Biden and VP Harris face terrible poll numbers and several crises.")
       ],
       statementsrelevant: [
+        Statement(
+          statement: "Today, @POTUS will sign the Infrastructure Investment and Jobs Act into law. It is, indeed, an historic day.",
+          author: "Kamala Harris",
+          isFactual: false,
+          description: "The signing of an Infrastructure Day cannot be labeled as historic as there have been infrastructure bills in the past.",
+          date: DateTime(2021, 11, 15, 21, 9)
+        ),
         Statement(
             statement:
                 "President Biden just signed the Bipartisan Infrastructure Deal into law. This is a once-in-a-generation investment in clean water, high-speed internet, public transit, roads, bridges, and more."),
@@ -350,7 +373,12 @@ class _MyHomePageState extends State<MyHomePage> {
       statementsfrom: [
         Statement(
             statement:
-                "The US drug epidemic is the deadliest it has ever been, new federal data shows, with overdose deaths topping 100,000 annually for the first time"),
+                "The US drug epidemic is the deadliest it has ever been, new federal data shows, with overdose deaths topping 100,000 annually for the first time",
+        author: "CNN",
+        date: DateTime(2021, 11, 17, 17, 27),
+        isFactual: true,
+        description: "Data shows that the deaths related to overdose have never been higher than April 2021 when they crossed the 100,000 mark",
+        sources: ["https://www.cdc.gov/nchs/nvss/vsrr/drug-overdose-data.htm"]),
         Statement(
             statement:
                 "Pfizer seeks FDA emergency use authorization for its antiviral pill, which the company says reduces the risk of Covid-19 hospitalization and death."),
@@ -376,7 +404,12 @@ class _MyHomePageState extends State<MyHomePage> {
       statementsabout: [
         Statement(
             statement:
-                "CNN published a headline calling In-N-Out the choice of 'white supremacists"),
+                "CNN published a headline calling In-N-Out the choice of 'white supremacists",
+        author: "ReganBabe",
+        date: DateTime(2021, 10, 27,18,27),
+        isFactual: false,
+        description: "The headline could not be found on the CNN website, and a spokesperson for the news outlet confirmed it was never published.",
+        sources: ["https://www.cnn.com"]),
         Statement(
             statement:
                 "A day went by, and a second day went by, and there was no violence. I heard there was going to be massive violence. They showed violence -- because about 20 people were violent in the front row, but there was nobody behind them. So CNN had the cameras very low, pointing to the sky...They said, 'Massive crowds have gathered. Massive crowds.' And I looked, I said, 'That's a strange angle. I've never seen that angle.' It was like -- you had a cameraman sitting on the floor pointing up. But every once in a while, you say, 'There's nobody behind the people in the front row. What's going on?' And it was a con. It was fake news as usual"),
@@ -394,7 +427,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 "CNN known for its dramatic live coverage of breaking news, some of which has drawn criticism as overly sensationalistic, has stressed its efforts to be nonpartisan, which have led to accusations of false balance."),
         Statement(
             statement:
-                "In a New York Observer column entitled 'Clinton News Network', political journalist Steve Kornacki criticized CNN's handling of the November 15, 2007, Democratic presidential debate, calling it biased towards Hillary Clinton."),
+                "Conspiracy theorists will say that CNN had packed the crowd for its old friend. But the audience imbalance, like the inclusion of Carville and Gergen, was more an indictment of CNN’s incompetence.",
+        author: "Steve Kornacki",
+          isFactual: true,
+          description: "The 2007 Presidential debate is widely considered to have been filled with mainly pro-Clinton supporters",
+          date: DateTime(2007,11,25, 10, 00)
+        ),
         Statement(
             statement:
                 "CNN was the first television channel to provide 24-hour news coverage and was the first all-news television channel in the United States")
