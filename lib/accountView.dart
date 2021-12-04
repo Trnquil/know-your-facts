@@ -151,11 +151,11 @@ class _AccountViewState extends State<AccountView> {
 
   statementType currentType;
   statementType _typeButton1 = statementType.individual;
-  Color _buttonColor1 = Colors.black54;
+  Color _buttonColor1 = Color.fromRGBO(0, 0, 0, 0.1);
   statementType _typeButton2 = statementType.about;
-  Color _buttonColor2 = Colors.black87;
+  Color _buttonColor2 = Color.fromRGBO(0, 0, 0, 0.1);
   statementType _typeButton3 = statementType.related;
-  Color _buttonColor3 = Colors.black87;
+  Color _buttonColor3 = Color.fromRGBO(0, 0, 0, 0.1);
 
   @override
   Widget build(BuildContext context) {
@@ -183,6 +183,7 @@ class _AccountViewState extends State<AccountView> {
           expandedHeight: MediaQuery.of(context).size.height /
               2.5, // Height of the Navigation bar when in full screen, should be bigger than 1/3 of the screen height and smaller than 1/2
           flexibleSpace: FlexibleSpaceBar(
+            centerTitle: true,
             // Displays the data from the passed accounts class in two rows
             title: RichText(
                 textAlign: TextAlign.center,
@@ -412,48 +413,5 @@ class _FavoriteIconState extends State<_FavoriteIcon> {
         print("Favorite");
       }
     });
-  }
-}
-
-// Generate a Button that looks similar to IOS style buttons under the material theme
-// Takes two inputs: A string title and a function onPressed that returns void
-class FilterButton extends StatelessWidget {
-  const FilterButton(
-      {Key? key,
-      required this.title,
-      required this.onPressed,
-      this.color = Colors.black87})
-      : super(key: key);
-
-  final String title;
-  final void Function()? onPressed;
-  final Color color;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-        // 25 is a good enough padding such that the spacing to another button looks good
-        width: MediaQuery.of(context).size.width / 3 - 12,
-        // Generate a rectangle that has rounded corners
-        child: ClipRRect(
-            borderRadius: BorderRadius.circular(15),
-            // Stacks a button in front of a Rectangle
-            child: Stack(children: [
-              Positioned.fill(
-                  child: Container(decoration: BoxDecoration(color: color))),
-              Center(
-                  child: TextButton(
-                child: Text(title),
-                onPressed: onPressed,
-                style: TextButton.styleFrom(
-                  padding: EdgeInsets.all(16),
-                  fixedSize: Size.fromWidth(
-                      MediaQuery.of(context).size.width / 3 - 12),
-                  primary: Colors.white,
-                  alignment: Alignment.center,
-                  textStyle: TextStyle(fontSize: 18),
-                ),
-              )),
-            ])));
   }
 }
