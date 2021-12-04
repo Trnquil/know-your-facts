@@ -111,19 +111,18 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Container(
-                  alignment: Alignment.center,
-                  padding: EdgeInsets.fromLTRB(0, 0, 30, 30),
-                  child: Container(
-                    height: 30,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        fit: BoxFit.contain,
-                        image: AssetImage('assets/logo.png'),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0,0,0,15),
+                    child: Container(
+                      height: 40,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          fit: BoxFit.contain,
+                          image: AssetImage('assets/logo.png'),
+                        ),
                       ),
                     ),
                   ),
-                ),
                 Container(
                   padding: EdgeInsets.all(5),
                   decoration: BoxDecoration(
