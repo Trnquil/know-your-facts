@@ -151,11 +151,11 @@ class _AccountViewState extends State<AccountView> {
 
   statementType currentType;
   statementType _typeButton1 = statementType.individual;
-  Color _buttonColor1 = Colors.black54;
+  Color _buttonColor1 = Color.fromRGBO(0, 0, 0, 0.1);
   statementType _typeButton2 = statementType.about;
-  Color _buttonColor2 = Colors.black87;
+  Color _buttonColor2 = Color.fromRGBO(0, 0, 0, 0.1);
   statementType _typeButton3 = statementType.related;
-  Color _buttonColor3 = Colors.black87;
+  Color _buttonColor3 = Color.fromRGBO(0, 0, 0, 0.1);
 
   @override
   Widget build(BuildContext context) {
@@ -183,6 +183,7 @@ class _AccountViewState extends State<AccountView> {
           expandedHeight: MediaQuery.of(context).size.height /
               2.5, // Height of the Navigation bar when in full screen, should be bigger than 1/3 of the screen height and smaller than 1/2
           flexibleSpace: FlexibleSpaceBar(
+            centerTitle: true,
             // Displays the data from the passed accounts class in two rows
             title: RichText(
                 textAlign: TextAlign.center,
@@ -251,29 +252,51 @@ class _AccountViewState extends State<AccountView> {
                   return Padding(
                     padding: const EdgeInsets.all(15),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        // Generate the FilterButtons to filter the statements they take a title and onPressed function as input
-                        FilterButton(
-                          color: _buttonColor1,
-                          title: _typeButton1.name(),
-                          onPressed: () {
-                            _changeStatementType(_typeButton1);
-                          },
+                        Expanded(
+                          child: Container(
+                            child: MaterialButton(
+                                onPressed: () {
+                                  _changeStatementType(_typeButton1);
+                                },
+                                child: Text(_typeButton1.name())),
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(10),
+                                    bottomLeft: Radius.circular(10)),
+                                border: Border.all(color: _buttonColor1)),
+                          ),
                         ),
-                        FilterButton(
-                            color: _buttonColor2,
-                            title: _typeButton2.name(),
-                            onPressed: () {
-                              _changeStatementType(_typeButton2);
-                            }),
-                        FilterButton(
-                          color: _buttonColor3,
-                          title: _typeButton3.name(),
-                          onPressed: () {
-                            _changeStatementType(_typeButton3);
-                          },
-                        )
+                        Expanded(
+                          child: Container(
+                            child: MaterialButton(
+                                onPressed: () {
+                                  _changeStatementType(_typeButton2);
+                                },
+                                child: Text(_typeButton2.name())),
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                border: Border.all(color: _buttonColor2)),
+                          ),
+                        ),
+                        Expanded(
+                          child: Container(
+                            child: MaterialButton(
+                                onPressed: () {
+                                  _changeStatementType(_typeButton3);
+                                },
+                                child: Text(_typeButton3.name())),
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.only(
+                                    topRight: Radius.circular(10),
+                                    bottomRight: Radius.circular(10)),
+                                border: Border.all(color: _buttonColor3)),
+                          ),
+                        ),
+                        // Generate the FilterButtons to filter the statements they take a title and onPressed function as input
                       ],
                     ),
                   );
@@ -284,13 +307,13 @@ class _AccountViewState extends State<AccountView> {
                 sliver: SliverList(
                   delegate: SliverChildBuilderDelegate(
                       (BuildContext context, int index) {
-                        return Center(child: Text(currentType.name(), style: TextStyle(
-                          fontSize: 34,
-                          fontWeight: FontWeight.bold
-                        ),));
-                      }
-                  ,
-                  childCount: 1),
+                    return Center(
+                        child: Text(
+                      currentType.name(),
+                      style:
+                          TextStyle(fontSize: 34, fontWeight: FontWeight.bold),
+                    ));
+                  }, childCount: 1),
                 ),
               ),
         // Generate a list of all statements that are currently filtered for
@@ -338,25 +361,25 @@ class _AccountViewState extends State<AccountView> {
       case statementType.about:
         setState(() {
           currentType = statementType.about;
-          _buttonColor1 = Colors.black87;
-          _buttonColor2 = Colors.black54;
-          _buttonColor3 = Colors.black87;
+          _buttonColor1 = Color.fromRGBO(0, 0, 0, 0.2);
+          _buttonColor2 = Colors.pink;
+          _buttonColor3 = Color.fromRGBO(0, 0, 0, 0.2);
         });
         break;
       case statementType.individual:
         setState(() {
           currentType = statementType.individual;
-          _buttonColor1 = Colors.black54;
-          _buttonColor2 = Colors.black87;
-          _buttonColor3 = Colors.black87;
+          _buttonColor1 = Colors.pink;
+          _buttonColor2 = Color.fromRGBO(0, 0, 0, 0.2);
+          _buttonColor3 = Color.fromRGBO(0, 0, 0, 0.2);
         });
         break;
       case statementType.related:
         setState(() {
           currentType = statementType.related;
-          _buttonColor1 = Colors.black87;
-          _buttonColor2 = Colors.black87;
-          _buttonColor3 = Colors.black54;
+          _buttonColor1 = Color.fromRGBO(0, 0, 0, 0.2);
+          _buttonColor2 = Color.fromRGBO(0, 0, 0, 0.2);
+          _buttonColor3 = Colors.pink;
         });
         break;
     }
@@ -390,48 +413,5 @@ class _FavoriteIconState extends State<_FavoriteIcon> {
         print("Favorite");
       }
     });
-  }
-}
-
-// Generate a Button that looks similar to IOS style buttons under the material theme
-// Takes two inputs: A string title and a function onPressed that returns void
-class FilterButton extends StatelessWidget {
-  const FilterButton(
-      {Key? key,
-      required this.title,
-      required this.onPressed,
-      this.color = Colors.black87})
-      : super(key: key);
-
-  final String title;
-  final void Function()? onPressed;
-  final Color color;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-        // 25 is a good enough padding such that the spacing to another button looks good
-        width: MediaQuery.of(context).size.width / 3 - 12,
-        // Generate a rectangle that has rounded corners
-        child: ClipRRect(
-            borderRadius: BorderRadius.circular(15),
-            // Stacks a button in front of a Rectangle
-            child: Stack(children: [
-              Positioned.fill(
-                  child: Container(decoration: BoxDecoration(color: color))),
-              Center(
-                  child: TextButton(
-                child: Text(title),
-                onPressed: onPressed,
-                style: TextButton.styleFrom(
-                  padding: EdgeInsets.all(16),
-                  fixedSize: Size.fromWidth(
-                      MediaQuery.of(context).size.width / 3 - 12),
-                  primary: Colors.white,
-                  alignment: Alignment.center,
-                  textStyle: TextStyle(fontSize: 18),
-                ),
-              )),
-            ])));
   }
 }
