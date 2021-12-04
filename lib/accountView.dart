@@ -251,29 +251,51 @@ class _AccountViewState extends State<AccountView> {
                   return Padding(
                     padding: const EdgeInsets.all(15),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        // Generate the FilterButtons to filter the statements they take a title and onPressed function as input
-                        FilterButton(
-                          color: _buttonColor1,
-                          title: _typeButton1.name(),
-                          onPressed: () {
-                            _changeStatementType(_typeButton1);
-                          },
+                        Expanded(
+                          child: Container(
+                            child: MaterialButton(
+                                onPressed: () {
+                                  _changeStatementType(_typeButton1);
+                                },
+                                child: Text(_typeButton1.name())),
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(10),
+                                    bottomLeft: Radius.circular(10)),
+                                border: Border.all(color: _buttonColor1)),
+                          ),
                         ),
-                        FilterButton(
-                            color: _buttonColor2,
-                            title: _typeButton2.name(),
-                            onPressed: () {
-                              _changeStatementType(_typeButton2);
-                            }),
-                        FilterButton(
-                          color: _buttonColor3,
-                          title: _typeButton3.name(),
-                          onPressed: () {
-                            _changeStatementType(_typeButton3);
-                          },
-                        )
+                        Expanded(
+                          child: Container(
+                            child: MaterialButton(
+                                onPressed: () {
+                                  _changeStatementType(_typeButton2);
+                                },
+                                child: Text(_typeButton2.name())),
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                border: Border.all(color: _buttonColor2)),
+                          ),
+                        ),
+                        Expanded(
+                          child: Container(
+                            child: MaterialButton(
+                                onPressed: () {
+                                  _changeStatementType(_typeButton3);
+                                },
+                                child: Text(_typeButton3.name())),
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.only(
+                                    topRight: Radius.circular(10),
+                                    bottomRight: Radius.circular(10)),
+                                border: Border.all(color: _buttonColor3)),
+                          ),
+                        ),
+                        // Generate the FilterButtons to filter the statements they take a title and onPressed function as input
                       ],
                     ),
                   );
@@ -284,13 +306,13 @@ class _AccountViewState extends State<AccountView> {
                 sliver: SliverList(
                   delegate: SliverChildBuilderDelegate(
                       (BuildContext context, int index) {
-                        return Center(child: Text(currentType.name(), style: TextStyle(
-                          fontSize: 34,
-                          fontWeight: FontWeight.bold
-                        ),));
-                      }
-                  ,
-                  childCount: 1),
+                    return Center(
+                        child: Text(
+                      currentType.name(),
+                      style:
+                          TextStyle(fontSize: 34, fontWeight: FontWeight.bold),
+                    ));
+                  }, childCount: 1),
                 ),
               ),
         // Generate a list of all statements that are currently filtered for
@@ -338,25 +360,25 @@ class _AccountViewState extends State<AccountView> {
       case statementType.about:
         setState(() {
           currentType = statementType.about;
-          _buttonColor1 = Colors.black87;
-          _buttonColor2 = Colors.black54;
-          _buttonColor3 = Colors.black87;
+          _buttonColor1 = Color.fromRGBO(0, 0, 0, 0.2);
+          _buttonColor2 = Colors.pink;
+          _buttonColor3 = Color.fromRGBO(0, 0, 0, 0.2);
         });
         break;
       case statementType.individual:
         setState(() {
           currentType = statementType.individual;
-          _buttonColor1 = Colors.black54;
-          _buttonColor2 = Colors.black87;
-          _buttonColor3 = Colors.black87;
+          _buttonColor1 = Colors.pink;
+          _buttonColor2 = Color.fromRGBO(0, 0, 0, 0.2);
+          _buttonColor3 = Color.fromRGBO(0, 0, 0, 0.2);
         });
         break;
       case statementType.related:
         setState(() {
           currentType = statementType.related;
-          _buttonColor1 = Colors.black87;
-          _buttonColor2 = Colors.black87;
-          _buttonColor3 = Colors.black54;
+          _buttonColor1 = Color.fromRGBO(0, 0, 0, 0.2);
+          _buttonColor2 = Color.fromRGBO(0, 0, 0, 0.2);
+          _buttonColor3 = Colors.pink;
         });
         break;
     }

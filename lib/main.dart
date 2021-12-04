@@ -105,7 +105,7 @@ class _MyHomePageState extends State<MyHomePage> {
       body: SingleChildScrollView(
         child: Padding(
           padding:
-              EdgeInsets.only(top: (MediaQuery.of(context).size.height / 10)),
+              EdgeInsets.only(top: (MediaQuery.of(context).size.height / 3.2)),
           child: Padding(
             padding: const EdgeInsets.all(30.0),
             child: Column(
