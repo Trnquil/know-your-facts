@@ -317,6 +317,24 @@ class _AccountViewState extends State<AccountView> {
                 ),
               ),
         // Generate a list of all statements that are currently filtered for
+        SliverPadding(
+          padding: EdgeInsets.all(0.0),
+          sliver: SliverList(
+            delegate: SliverChildListDelegate(
+              [
+                Center(
+                    child: currentType == statementType.individual
+                        ? Text('Statements made by ' + widget.entity.title)
+                        : currentType == statementType.about
+                            ? Text('Statements that directly involve ' +
+                                widget.entity.title)
+                            : Text('Statements made by entities related to ' +
+                                widget.entity.title))
+                // Scrollable horizontal widget here
+              ],
+            ),
+          ),
+        ),
         statements.length != 0
             ? SliverPadding(
                 padding: EdgeInsets.only(bottom: 100),
