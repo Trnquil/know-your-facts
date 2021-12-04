@@ -112,6 +112,19 @@ class _MyHomePageState extends State<MyHomePage> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Container(
+                  alignment: Alignment.center,
+                  padding: EdgeInsets.fromLTRB(0, 0, 30, 30),
+                  child: Container(
+                    height: 30,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        fit: BoxFit.contain,
+                        image: AssetImage('assets/logo.png'),
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
                   padding: EdgeInsets.all(5),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(1000)),
