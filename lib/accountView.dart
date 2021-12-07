@@ -7,7 +7,7 @@ import 'package:know_your_facts/widgets/statementContainer.dart';
 // enum to differentiate between the statement types
 enum statementType {
   individual,
-  about,
+  involving,
   related,
 }
 
@@ -17,7 +17,7 @@ extension transformToString on statementType {
     switch (this) {
       case statementType.individual:
         return "Individual";
-      case statementType.about:
+      case statementType.involving:
         return "Involving";
       case statementType.related:
         return "Related";
@@ -151,8 +151,8 @@ class _AccountViewState extends State<AccountView> {
 
   statementType currentType;
   statementType _typeButton1 = statementType.individual;
-  Color _buttonColor1 = Color.fromRGBO(0, 0, 0, 0.1);
-  statementType _typeButton2 = statementType.about;
+  Color _buttonColor1 = Colors.pink;
+  statementType _typeButton2 = statementType.involving;
   Color _buttonColor2 = Color.fromRGBO(0, 0, 0, 0.1);
   statementType _typeButton3 = statementType.related;
   Color _buttonColor3 = Color.fromRGBO(0, 0, 0, 0.1);
@@ -165,7 +165,7 @@ class _AccountViewState extends State<AccountView> {
       case statementType.individual:
         statements = widget.entity.statementsfrom;
         break;
-      case statementType.about:
+      case statementType.involving:
         statements = widget.entity.statementsabout;
         break;
       case statementType.related:
@@ -324,12 +324,24 @@ class _AccountViewState extends State<AccountView> {
               [
                 Center(
                     child: currentType == statementType.individual
-                        ? Text('Statements made by ' + widget.entity.title)
-                        : currentType == statementType.about
-                            ? Text('Statements that directly involve ' +
-                                widget.entity.title)
-                            : Text('Statements made by entities related to ' +
-                                widget.entity.title))
+                        ? Text(
+                            'Statements made by ' + widget.entity.title,
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 15),
+                          )
+                        : currentType == statementType.involving
+                            ? Text(
+                                'Statements that directly involve ' +
+                                    widget.entity.title,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 15),
+                              )
+                            : Text(
+                                'Statements generally related to ' +
+                                    widget.entity.title,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 15),
+                              ))
                 // Scrollable horizontal widget here
               ],
             ),
@@ -376,9 +388,9 @@ class _AccountViewState extends State<AccountView> {
   // Check what the current statement type is and generate the correct statements and buttons
   void _changeStatementType(statementType _type) {
     switch (_type) {
-      case statementType.about:
+      case statementType.involving:
         setState(() {
-          currentType = statementType.about;
+          currentType = statementType.involving;
           _buttonColor1 = Color.fromRGBO(0, 0, 0, 0.2);
           _buttonColor2 = Colors.pink;
           _buttonColor3 = Color.fromRGBO(0, 0, 0, 0.2);

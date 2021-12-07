@@ -70,9 +70,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
     for (Account account in suggestions) {
       if (isATest) {
-        if (exp.hasMatch(account.title + " " + statementType.about.name())) {
-          matches
-              .add(new Suggestion(entity: account, type: statementType.about));
+        if (exp
+            .hasMatch(account.title + " " + statementType.involving.name())) {
+          matches.add(
+              new Suggestion(entity: account, type: statementType.involving));
         }
         if (exp
             .hasMatch(account.title + " " + statementType.individual.name())) {
@@ -111,18 +112,18 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(0,0,0,15),
-                    child: Container(
-                      height: 40,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          fit: BoxFit.contain,
-                          image: AssetImage('assets/logo.png'),
-                        ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 15),
+                  child: Container(
+                    height: 40,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        fit: BoxFit.contain,
+                        image: AssetImage('assets/logo.png'),
                       ),
                     ),
                   ),
+                ),
                 Container(
                   padding: EdgeInsets.all(5),
                   decoration: BoxDecoration(
