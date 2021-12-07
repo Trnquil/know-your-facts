@@ -351,6 +351,7 @@ List<Account> suggestions = [
   Account(
     title: "CNN",
     label: "News Source",
+    image: Image(image: NetworkImage("https://www.logodesignlove.com/wp-content/uploads/2010/06/cnn-logo-white-on-red.jpg"), fit: BoxFit.cover,),
     statementsfrom: [
       Statement(
           statement:
