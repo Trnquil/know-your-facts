@@ -4,40 +4,6 @@ import 'data_model/account.dart';
 
 List<Account> suggestions = [
   Account(
-      title: 'Apple',
-      label: 'Company',
-      image: Image(
-        image: NetworkImage(
-            "https://www.apple.com/ac/structured-data/images/open_graph_logo.png?202111120425"),
-      )),
-  Account(
-      title: 'Apple',
-      label: 'Fruit',
-      image: Image(
-          image: NetworkImage(
-              "https://www.applesfromny.com/wp-content/uploads/2020/06/SnapdragonNEW.png"))),
-  Account(
-      title: 'Nicky Minaj',
-      label: 'Singer',
-      image: Image(
-        image: NetworkImage(
-            "https://upload.wikimedia.org/wikipedia/commons/5/54/Nicki_Minaj_MTV_VMAs_4.jpg"),
-      )),
-  Account(
-      title: 'Benjamin Shapiro',
-      label: 'Author',
-      image: Image(
-        image: NetworkImage(
-            "https://2sai80zhft74386rl1kqxhyw-wpengine.netdna-ssl.com/wp-content/uploads/2021/08/Ben-Shapiro-Headshot-1.jpg"),
-      )),
-  Account(
-      title: 'Jordan Peterson',
-      label: 'Author',
-      image: Image(
-        image: NetworkImage(
-            "https://www.timeshighereducation.com/sites/default/files/styles/the_breaking_news_image_style/public/the040419_p16_peterson.jpg?itok=13lrkbaF"),
-      )),
-  Account(
     title: "Joe Biden",
     label: "Politician",
     image: Image(image: AssetImage("test/test_data/joe_biden.jpg")),
@@ -142,7 +108,7 @@ List<Account> suggestions = [
     label: "Company",
     image: Image(
       image: NetworkImage(
-          "https://mms.businesswire.com/media/20211104005317/en/1012288/22/Palantir_logo.jpg"),
+          "https://assets.wallstreet-online.de/_media/17340/unternehmen/size_645/palantir-logo.jpg"),
     ),
     statementsfrom: [
       Statement(
@@ -192,6 +158,9 @@ List<Account> suggestions = [
   Account(
     title: "Amazon",
     label: "Company",
+    image: Image(
+        image: NetworkImage(
+            "https://s3-symbol-logo.tradingview.com/amazon--600.png")),
     statementsfrom: [
       Statement(
           statement:
@@ -236,6 +205,8 @@ List<Account> suggestions = [
   Account(
     title: "Goldman Sachs",
     label: "Company",
+    image:
+        Image(image: NetworkImage("https://design.gs.com/logo-circular.png")),
     statementsfrom: [
       Statement(statement: "Goldman Sachs is doing God's work"),
       Statement(
@@ -271,6 +242,9 @@ List<Account> suggestions = [
   Account(
     title: "Citadel",
     label: "Company",
+    image: Image(
+        image: NetworkImage(
+            "https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_256,w_256,f_auto,q_auto:eco,dpr_1/v1467923235/zusbl4no2snuczumz63a.png")),
     statementsfrom: [
       Statement(
           statement:
@@ -310,6 +284,9 @@ List<Account> suggestions = [
   Account(
     title: "Shell",
     label: "Company",
+    image: Image(
+        image: NetworkImage(
+            "https://brazilenergyinsight.com/wp-content/uploads/2019/03/shell.jpg")),
     statementsfrom: [
       Statement(
           statement:
@@ -351,7 +328,11 @@ List<Account> suggestions = [
   Account(
     title: "CNN",
     label: "News Source",
-    image: Image(image: NetworkImage("https://www.logodesignlove.com/wp-content/uploads/2010/06/cnn-logo-white-on-red.jpg"), fit: BoxFit.cover,),
+    image: Image(
+      image: NetworkImage(
+          "https://www.logodesignlove.com/wp-content/uploads/2010/06/cnn-logo-white-on-red.jpg"),
+      fit: BoxFit.cover,
+    ),
     statementsfrom: [
       Statement(
           statement:
@@ -422,4 +403,38 @@ List<Account> suggestions = [
               "CNN was the first television channel to provide 24-hour news coverage and was the first all-news television channel in the United States")
     ],
   ),
+  Account(
+      title: 'Apple',
+      label: 'Company',
+      image: Image(
+        image: NetworkImage(
+            "https://www.apple.com/ac/structured-data/images/open_graph_logo.png?202111120425"),
+      )),
+  Account(
+      title: 'Apple',
+      label: 'Fruit',
+      image: Image(
+          image: NetworkImage(
+              "https://www.applesfromny.com/wp-content/uploads/2020/06/SnapdragonNEW.png"))),
+  Account(
+      title: 'Nicky Minaj',
+      label: 'Singer',
+      image: Image(
+        image: NetworkImage(
+            "https://upload.wikimedia.org/wikipedia/commons/5/54/Nicki_Minaj_MTV_VMAs_4.jpg"),
+      )),
+  Account(
+      title: 'Benjamin Shapiro',
+      label: 'Author',
+      image: Image(
+        image: NetworkImage(
+            "https://2sai80zhft74386rl1kqxhyw-wpengine.netdna-ssl.com/wp-content/uploads/2021/08/Ben-Shapiro-Headshot-1.jpg"),
+      )),
+  Account(
+      title: 'Jordan Peterson',
+      label: 'Author',
+      image: Image(
+        image: NetworkImage(
+            "https://www.timeshighereducation.com/sites/default/files/styles/the_breaking_news_image_style/public/the040419_p16_peterson.jpg?itok=13lrkbaF"),
+      ))
 ];

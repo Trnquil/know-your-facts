@@ -195,23 +195,26 @@ class _MyHomePageState extends State<MyHomePage> {
                     },
                   ),
                 ),
-                PicTiles(
-                  accounts: suggestions,
-                ),
+                PicTiles(accounts: suggestions, isATest: isATest),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text("A Test"),
+                    Text("B Test"),
                     Switch(
+                        inactiveThumbColor: Color.fromRGBO(0, 0, 0, 0.5),
+                        activeColor: Color.fromRGBO(0, 0, 0, 0.5),
+                        inactiveTrackColor: Color.fromRGBO(0, 0, 0, 0.2),
+                        activeTrackColor: Color.fromRGBO(0, 0, 0, 0.2),
                         value: isATest,
                         onChanged: (bool newValue) {
                           setState(() {
                             print(newValue);
                             isATest = newValue;
                           });
-                        })
+                        }),
+                    Text("A Test")
                   ],
                 ),
               ],

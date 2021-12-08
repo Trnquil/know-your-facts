@@ -25,103 +25,6 @@ extension transformToString on statementType {
   }
 }
 
-void main() {
-  runApp(MaterialApp(
-    home: AccountView(
-        isATest: false,
-        entity: new Account(
-            title: "Joseph Robinette Biden Sr.",
-            image: Image(image: AssetImage("test/test_data/joe_biden.jpg")),
-            label: "Politician",
-            statementsabout: [
-              new Statement(
-                  statement: "Hello",
-                  isFactual: false,
-                  description: "False",
-                  author: "me",
-                  sources: ["me"])
-            ],
-            statementsfrom: [
-              new Statement(
-                  statement:
-                      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sapien turpis, semper eget quam ut, aliquet consectetur ipsum. Cras ornare urna metus, quis placerat ex accumsan eget. Integer rhoncus ex non nisl dignissim auctor. Nam in vehicula nisi. Fusce sollicitudin lorem vel felis vehicula, in luctus risus bibendum. Suspendisse eget.",
-                  isFactual: false,
-                  description: "This is the description of the data that is presented above on Joe Biden.",
-                  author: "me",
-                  date: DateTime.now(),
-                  sources: ["https://www.google.com"]),
-              new Statement(
-                  statement: "Hello",
-                  isFactual: true,
-                  description: "Factual",
-                  author: "not me",
-                  sources: ["me"]),
-              new Statement(
-                  statement: "Hello",
-                  isFactual: false,
-                  description: "False",
-                  author: "me",
-                  sources: ["me"]),
-              new Statement(
-                  statement: "Hello",
-                  isFactual: false,
-                  description: "False",
-                  author: "me",
-                  sources: ["me"]),
-              new Statement(
-                  statement: "Hello",
-                  isFactual: false,
-                  description: "False",
-                  author: "me",
-                  sources: ["me"]),
-              new Statement(
-                  statement: "Hello",
-                  isFactual: false,
-                  description: "False",
-                  author: "me",
-                  sources: ["me"]),
-              new Statement(
-                  statement: "Hello",
-                  isFactual: false,
-                  description: "False",
-                  author: "me",
-                  sources: ["me"]),
-              new Statement(
-                  statement: "Hello",
-                  isFactual: false,
-                  description: "False",
-                  author: "me",
-                  sources: ["me"]),
-              new Statement(
-                  statement: "Hello",
-                  isFactual: false,
-                  description: "False",
-                  author: "me",
-                  sources: ["me"]),
-              new Statement(
-                  statement: "Hello",
-                  isFactual: false,
-                  description: "False",
-                  author: "me",
-                  sources: ["me"]),
-              new Statement(
-                  statement: "Hello",
-                  isFactual: false,
-                  description: "False",
-                  author: "me",
-                  sources: ["me"])
-            ],
-            statementsrelevant: [
-              new Statement(
-                  statement: "Hello",
-                  isFactual: false,
-                  description: "False",
-                  author: "me",
-                  sources: ["me"])
-            ])),
-  ));
-}
-
 /*
 AccountView Class:
 Creates a View which displays the statements made by an account type entity. It includes a navigation bar that moves out of the way. It can filter statements into three categories.
@@ -258,6 +161,7 @@ class _AccountViewState extends State<AccountView> {
                           child: Container(
                             child: MaterialButton(
                                 onPressed: () {
+                                  print(widget.isATest);
                                   _changeStatementType(_typeButton1);
                                 },
                                 child: Text(_typeButton1.name())),
